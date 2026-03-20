@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "Remember Names",
+    "slug": "remember-names",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#f5f5f7"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mediakit.remembernames",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Take photos of people you meet to remember them better.",
+        "NSPhotoLibraryUsageDescription": "Choose photos of people you meet to remember them better."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#007AFF",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "package": "com.mediakit.remembernames"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}

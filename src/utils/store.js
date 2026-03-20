@@ -1,16 +1,15 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 const STORAGE_KEY = 'remembernames_data'
 
 const defaultData = {
   people: [],
   groups: [],
-  settings: {
-    accentColor: '#007AFF',
-  },
 }
 
-export function loadData() {
+export async function loadData() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
+    const raw = await AsyncStorage.getItem(STORAGE_KEY)
     if (!raw) return { ...defaultData }
     const parsed = JSON.parse(raw)
     return { ...defaultData, ...parsed }
@@ -19,8 +18,8 @@ export function loadData() {
   }
 }
 
-export function saveData(data) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+export async function saveData(data) {
+  await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data))
 }
 
 export function generateId() {
@@ -28,6 +27,7 @@ export function generateId() {
 }
 
 export function getInitials(name) {
+  if (!name) return '?'
   return name
     .split(' ')
     .map((w) => w[0])
@@ -42,6 +42,7 @@ const AVATAR_COLORS = [
 ]
 
 export function getAvatarColor(name) {
+  if (!name) return AVATAR_COLORS[0]
   let hash = 0
   for (let i = 0; i < name.length; i++) {
     hash = name.charCodeAt(i) + ((hash << 5) - hash)
@@ -58,4 +59,13 @@ export function timeAgo(dateStr) {
   if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`
   if (diff < 604800) return `${Math.floor(diff / 86400)}d ago`
   return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+}
+
+export function shuffle(arr) {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
 }
